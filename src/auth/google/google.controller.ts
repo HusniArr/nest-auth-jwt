@@ -1,6 +1,5 @@
-import { Controller, Get,  Redirect,  Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { User } from 'src/users/entities/user.entity';
 import {JwtAuthService } from '../jwt-auth.service';
 import { GoogleAuthGuard } from './google-auth.guard';
 
@@ -17,10 +16,10 @@ export class GoogleController {
     @Get('redirect')
     @UseGuards(GoogleAuthGuard)
     async googleAuthRedirect(@Req() req: Request, @Res() res: Response){
-        // const  { accessToken } = this.jwtAuthService.login(req.user);
-        // res.cookie('jwt', accessToken);
-        // return req.user;
-        res.redirect('/')
+        const { accessToken } = this.jwtAuthService.login(req.user);
+        res.cookie('jwt', accessToken);
+        return req.user;
+        
     }
   
 }

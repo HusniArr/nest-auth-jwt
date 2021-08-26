@@ -6,7 +6,7 @@ import { User } from "../users/entities/user.entity";
 @Injectable()
 export class JwtAuthService{
     constructor(private jwtService: JwtService){}
-    login(user:User){
+    login(user:any){
         const payload: JwtPayload = {username: user.username,sub:user.id}
         return {
             accessToken: this.jwtService.sign(payload),
