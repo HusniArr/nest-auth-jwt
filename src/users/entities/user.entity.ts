@@ -8,7 +8,7 @@ id:number;
 @Column({nullable:false})
 provider:Provider
 @Column({nullable:false})
-provider_id:string;
+providerId:string;
 @Column({nullable:false})
 username:string;
 @Column({nullable:false})

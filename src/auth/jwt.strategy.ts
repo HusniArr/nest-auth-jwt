@@ -3,6 +3,9 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt,Strategy } from "passport-jwt";
 import { JwtConstants } from "./constants";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export type JwtPayload = {sub:number,username:string}
 
@@ -19,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
         super({
             jwtFromRequest: extractJwtFromCookie,
             ignoreExpiration:false,
-            secretOrKey:JwtConstants.secret,
+            secretOrKey:configService.get<string>('SECRET'),
         });
     }
  
